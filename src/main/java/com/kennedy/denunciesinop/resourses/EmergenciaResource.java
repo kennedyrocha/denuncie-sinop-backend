@@ -1,27 +1,28 @@
 package com.kennedy.denunciesinop.resourses;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kennedy.denunciesinop.domain.Emergencia;
+import com.kennedy.denunciesinop.services.EmergenciaService;
 
 @RestController
 @RequestMapping(value="/emergencias")
 public class EmergenciaResource {
+	
+	@Autowired
+	private EmergenciaService service;
 
-	@RequestMapping(method=RequestMethod.GET)
-	public List<Emergencia> listar(){
-		;
-		List<Emergencia> lista = new ArrayList<>();
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public ResponseEntity<?> listar(@PathVariable Integer id){
 		
-		lista.add(new Emergencia(1, 2, 15, 20));
-		lista.add(new Emergencia(2, 1, 18, 98));
-		lista.add(new Emergencia(3, 5, 30, 3));
+
+		Emergencia obj = service.buscar(id);
 		
-		return lista;
+		return ResponseEntity.ok().body(obj);
 	}
 }
