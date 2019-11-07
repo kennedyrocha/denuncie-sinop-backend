@@ -1,9 +1,5 @@
 package com.kennedy.denunciesinop;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,9 +22,9 @@ public class DenunciaSinopApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		
-		Emergencia em1 = new Emergencia(1, 2, 15, 20);
-		Emergencia em2 = new Emergencia(2, 1, 18, 98);
-		Emergencia em3 = new Emergencia(3, 5, 30, 3);
+		Emergencia em1 = new Emergencia(null, 2, 15, 20);
+		Emergencia em2 = new Emergencia(null, 1, 18, 98);
+		Emergencia em3 = new Emergencia(null, 5, 30, 3);
 		
 		emergenciaRepository.save(em1);
 		emergenciaRepository.save(em2);

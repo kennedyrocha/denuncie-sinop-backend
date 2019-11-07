@@ -14,9 +14,21 @@ public class EmergenciaService {
 	@Autowired
 	EmergenciaRepository repo;
 	
-	public Emergencia buscar(Integer id) {
+	public Emergencia find(Integer id) {
 		
 		Optional<Emergencia> obj = repo.findById(id);
 		return obj.orElse(null);
+	}
+	
+	public Emergencia insert(Emergencia obj) {
+		
+		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	public Emergencia update(Emergencia obj) {
+		
+		this.find(obj.getId());
+		return repo.save(obj);
 	}
 }
