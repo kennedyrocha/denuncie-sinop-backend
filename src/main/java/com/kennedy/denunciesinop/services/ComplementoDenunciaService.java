@@ -15,7 +15,7 @@ public class ComplementoDenunciaService {
 	@Autowired
 	private ComplementosDenunciaRepository repo;
 	
-	public ComplementoDenuncia buscar(Integer id) {
+	public ComplementoDenuncia find(Integer id) {
 		
 		Optional<ComplementoDenuncia> obj = repo.findById(id);
 		

@@ -20,7 +20,7 @@ public class DenunciaResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Denuncia> buscar(@PathVariable Integer id){
 		
-		Denuncia obj = service.buscar(id);
+		Denuncia obj = service.find(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}

@@ -18,9 +18,9 @@ public class ComplementoDenunciaResource {
 	private ComplementoDenunciaService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> buscar(@PathVariable Integer id){
+	public ResponseEntity<ComplementoDenuncia> buscar(@PathVariable Integer id){
 		
-		ComplementoDenuncia obj = service.buscar(id);
+		ComplementoDenuncia obj = service.find(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}

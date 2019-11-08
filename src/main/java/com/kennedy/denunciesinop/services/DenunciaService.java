@@ -15,7 +15,7 @@ public class DenunciaService {
 	@Autowired
 	DenunciaRepository repo;
 	
-	public Denuncia buscar(Integer id) {
+	public Denuncia find(Integer id) {
 		
 		Optional<Denuncia> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado id: " + id
