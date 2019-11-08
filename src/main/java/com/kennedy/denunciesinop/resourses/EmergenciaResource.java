@@ -1,6 +1,7 @@
 package com.kennedy.denunciesinop.resourses;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,15 @@ public class EmergenciaResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Emergencia> find(@PathVariable Integer id){
 		
-
 		Emergencia obj = service.find(id);
+		
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<Emergencia>> findAll(){
+		
+		List<Emergencia> obj = service.findAll();
 		
 		return ResponseEntity.ok().body(obj);
 	}

@@ -6,13 +6,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.kennedy.denunciesinop.domain.Emergencia;
+import com.kennedy.denunciesinop.domain.Usuario;
 import com.kennedy.denunciesinop.repositories.EmergenciaRepository;
+import com.kennedy.denunciesinop.repositories.UsuarioRepository;
 
 @SpringBootApplication
 public class DenunciaSinopApplication implements CommandLineRunner {
 
 	@Autowired
 	EmergenciaRepository emergenciaRepository;
+	
+	@Autowired
+	UsuarioRepository usuarioRepository;
 	
 	public static void main(String[] args) {		
 		SpringApplication.run(DenunciaSinopApplication.class, args);
@@ -21,6 +26,7 @@ public class DenunciaSinopApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		Usuario usu1 = new Usuario(null,"Maria Silva", "kennedy@gmail.com","05333533199");
 		
 		Emergencia em1 = new Emergencia(null, 2, 15, 20);
 		Emergencia em2 = new Emergencia(null, 1, 18, 98);
@@ -29,6 +35,8 @@ public class DenunciaSinopApplication implements CommandLineRunner {
 		emergenciaRepository.save(em1);
 		emergenciaRepository.save(em2);
 		emergenciaRepository.save(em3);
+		
+		usuarioRepository.save(usu1);
 	}
 
 }

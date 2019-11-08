@@ -1,5 +1,6 @@
 package com.kennedy.denunciesinop.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,12 @@ public class EmergenciaService {
 		
 		Optional<Emergencia> obj = repo.findById(id);
 		return obj.orElse(null);
+	}
+	
+	public List<Emergencia> findAll() {
+		
+		List<Emergencia> obj = repo.findAll();
+		return obj;
 	}
 	
 	public Emergencia insert(Emergencia obj) {
