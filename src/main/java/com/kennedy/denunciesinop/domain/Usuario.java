@@ -26,6 +26,10 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario")
 	private List<Emergencia> emergencias = new ArrayList<>();
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="usuario")
+	private List<Denuncia> denuncias = new ArrayList<>();
+	
 	public Usuario() {
 		super();
 	}
@@ -76,6 +80,14 @@ public class Usuario implements Serializable {
 
 	public void setEmergencias(List<Emergencia> emergencias) {
 		this.emergencias = emergencias;
+	}
+
+	public List<Denuncia> getDenuncias() {
+		return denuncias;
+	}
+
+	public void setDenuncias(List<Denuncia> denuncias) {
+		this.denuncias = denuncias;
 	}
 
 	@Override
