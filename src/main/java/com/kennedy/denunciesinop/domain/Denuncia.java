@@ -40,7 +40,10 @@ public class Denuncia implements Serializable {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.anonimo = anonimo;
-		this.usuario = usuario;
+		
+		if (!anonimo) {
+			this.usuario = usuario;			
+		}
 	}
 
 	public Integer getId() {
@@ -81,6 +84,10 @@ public class Denuncia implements Serializable {
 
 	public void setAnonimo(boolean anonimo) {
 		this.anonimo = anonimo;
+		
+		if (anonimo) {
+			this.setUsuario(null);
+		}
 	}
 
 	public Usuario getUsuario() {
