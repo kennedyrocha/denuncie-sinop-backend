@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kennedy.denunciesinop.domain.Emergencia;
 import com.kennedy.denunciesinop.repositories.EmergenciaRepository;
+import com.kennedy.denunciesinop.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class EmergenciaService {
@@ -18,7 +19,8 @@ public class EmergenciaService {
 	public Emergencia find(Integer id) {
 		
 		Optional<Emergencia> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado id: " + id
+									+ ", tipo: " + Emergencia.class.getName()));
 	}
 	
 	public List<Emergencia> findAll() {

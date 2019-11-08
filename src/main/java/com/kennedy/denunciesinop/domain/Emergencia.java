@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.kennedy.denunciesinop.domain.enums.TipoEmergencia;
 
 @Entity
@@ -22,6 +23,7 @@ public class Emergencia implements Serializable {
 	private long latitude;
 	private long longitude;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
