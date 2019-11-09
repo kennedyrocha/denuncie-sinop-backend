@@ -1,11 +1,14 @@
 package com.kennedy.denunciesinop.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable {
@@ -17,6 +20,9 @@ public class Usuario implements Serializable {
 	private String nome;
 	private String email;
 	private String cpfOuCnpj;
+	
+	@OneToMany(mappedBy="usuario")
+	private List<Emergencia> emergencias = new ArrayList<>();
 	
 	public Usuario() {
 		super();
@@ -60,6 +66,14 @@ public class Usuario implements Serializable {
 
 	public void setCpfOuCnpj(String cpfOuCnpj) {
 		this.cpfOuCnpj = cpfOuCnpj;
+	}
+
+	public List<Emergencia> getEmergencias() {
+		return emergencias;
+	}
+
+	public void setEmergencias(List<Emergencia> emergencias) {
+		this.emergencias = emergencias;
 	}
 
 	@Override

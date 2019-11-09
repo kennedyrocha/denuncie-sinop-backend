@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.kennedy.denunciesinop.domain.enums.TipoEmergencia;
 
@@ -20,16 +22,21 @@ public class Emergencia implements Serializable {
 	private long latitude;
 	private long longitude;
 	
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
+
 	public Emergencia() {
 		super();
 	}
 
-	public Emergencia(Integer id, Integer tipo, long latitude, long longitude) {
+	public Emergencia(Integer id, Integer tipo, long latitude, long longitude, Usuario usuario) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.usuario = usuario;
 	}
 
 	public Integer getId() {
@@ -62,6 +69,14 @@ public class Emergencia implements Serializable {
 
 	public void setTipo(TipoEmergencia tipo) {
 		this.tipo = tipo.getCod();
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override

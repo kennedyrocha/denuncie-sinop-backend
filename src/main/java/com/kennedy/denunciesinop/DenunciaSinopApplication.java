@@ -1,5 +1,7 @@
 package com.kennedy.denunciesinop;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,16 +29,17 @@ public class DenunciaSinopApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		Usuario usu1 = new Usuario(null,"Maria Silva", "kennedy@gmail.com","05333533199");
+		Usuario usu2 = new Usuario(null,"Maria Silva", "kennedy2@gmail.com","36378912377");
 		
-		Emergencia em1 = new Emergencia(null, 2, 15, 20);
-		Emergencia em2 = new Emergencia(null, 1, 18, 98);
-		Emergencia em3 = new Emergencia(null, 5, 30, 3);
+		Emergencia em1 = new Emergencia(null, 2, 15, 20, usu1);
+		Emergencia em2 = new Emergencia(null, 1, 18, 98, usu2);
+		Emergencia em3 = new Emergencia(null, 5, 30, 53, usu1);
+		Emergencia em4 = new Emergencia(null, 4, 30, 39, usu2);
 		
-		emergenciaRepository.save(em1);
-		emergenciaRepository.save(em2);
-		emergenciaRepository.save(em3);
-		
-		usuarioRepository.save(usu1);
-	}
+		usu1.getEmergencias().addAll(Arrays.asList(em1,em3));
+		usu2.getEmergencias().addAll(Arrays.asList(em2,em4));
 
+		usuarioRepository.saveAll(Arrays.asList(usu1,usu2));
+		emergenciaRepository.saveAll(Arrays.asList(em1,em2,em3,em4));
+	}
 }
