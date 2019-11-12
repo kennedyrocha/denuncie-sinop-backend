@@ -46,7 +46,7 @@ public class UsuarioService {
 		}
 		catch (DataIntegrityViolationException e) {
 
-			throw new DataIntegrityException("Não possível excluir pois há entidades relacionadas");
+			throw new DataIntegrityException("Não possível excluir pois há denúncias e/ou emergências para esse cliente");
 		}
 	}
 	

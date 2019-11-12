@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +35,7 @@ public class Denuncia implements Serializable {
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
-	@OneToMany(mappedBy="denuncia")
+	@OneToMany(mappedBy="denuncia", cascade=CascadeType.ALL)
 	private List<ComplementoDenuncia> complementos = new ArrayList<>();
 
 	public Denuncia() {
