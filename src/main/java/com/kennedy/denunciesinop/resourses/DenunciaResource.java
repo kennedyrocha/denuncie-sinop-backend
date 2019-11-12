@@ -3,6 +3,8 @@ package com.kennedy.denunciesinop.resourses;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,7 +55,7 @@ public class DenunciaResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Denuncia obj){
+	public ResponseEntity<Void> insert(@Valid @RequestBody Denuncia obj){
 		
 		obj = service.insert(obj);
 		
@@ -63,7 +65,7 @@ public class DenunciaResource {
 	}
 	
 	@RequestMapping(value="/complemento",method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody ComplementoDenuncia obj, @RequestParam Integer denuncia_id){
+	public ResponseEntity<Void> insert(@Valid @RequestBody ComplementoDenuncia obj, @RequestParam Integer denuncia_id){
 		
 		obj = serviceComplemento.insert(obj, denuncia_id);
 		

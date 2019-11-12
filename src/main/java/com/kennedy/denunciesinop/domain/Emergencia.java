@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.kennedy.denunciesinop.domain.enums.TipoEmergencia;
@@ -19,6 +20,8 @@ public class Emergencia implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotNull(message="Preenchimento Obrogatório")
 	private Integer tipo;
 	private long latitude;
 	private long longitude;

@@ -2,12 +2,16 @@ package com.kennedy.denunciesinop.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.kennedy.denunciesinop.domain.Emergencia;
 
 public class EmergenciaDTO implements Serializable{
 	private static final long serialVersionUID = 1;
 	
 	private Integer id;
+	
+	@NotEmpty(message="Preenchimento Obrogatório")
 	private Integer tipo;
 	private long latitude;
 	private long longitude;

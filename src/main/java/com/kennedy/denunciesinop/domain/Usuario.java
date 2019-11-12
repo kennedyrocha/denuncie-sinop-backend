@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
@@ -18,8 +19,14 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotEmpty(message="Preenchimento Obrogatório")
 	private String nome;
+	
+	@NotEmpty(message="Preenchimento Obrogatório")
 	private String email;
+	
+	@NotEmpty(message="Preenchimento Obrogatório")
 	private String cpfOuCnpj;
 	
 	@JsonIgnore
