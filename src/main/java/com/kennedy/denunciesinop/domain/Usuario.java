@@ -2,9 +2,15 @@ package com.kennedy.denunciesinop.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kennedy.denunciesinop.domain.enums.Perfil;
 @Entity
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -34,19 +41,27 @@ public class Usuario implements Serializable {
 	private List<Emergencia> emergencias = new ArrayList<>();
 	
 	@JsonIgnore
+	private String senha;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
 	private List<Denuncia> denuncias = new ArrayList<>();
+	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable (name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
 	
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(Integer id, String nome, String email, String cpfOuCnpj) {
+	public Usuario(Integer id, String nome, String email, String cpfOuCnpj, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
+		this.senha = senha;
 	}
 
 	public Integer getId() {
@@ -95,6 +110,22 @@ public class Usuario implements Serializable {
 
 	public void setDenuncias(List<Denuncia> denuncias) {
 		this.denuncias = denuncias;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	public Set<Perfil> getPerfis(){
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+	
+	public void addPerfil (Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 	@Override

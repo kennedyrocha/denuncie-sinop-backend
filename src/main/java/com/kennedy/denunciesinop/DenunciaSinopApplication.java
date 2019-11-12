@@ -38,8 +38,8 @@ public class DenunciaSinopApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario usu1 = new Usuario(null,"Maria Silva", "kennedy@gmail.com","05333533199");
-		Usuario usu2 = new Usuario(null,"Maria Silva", "kennedy2@gmail.com","36378912377");
+		Usuario usu1 = new Usuario(null,"Maria Silva", "kennedy@gmail.com","05333533199","123");
+		Usuario usu2 = new Usuario(null,"Maria Silva", "kennedy2@gmail.com","36378912377","123");
 
 		Emergencia em1 = new Emergencia(null, 2, 15, 20, usu1);
 		Emergencia em2 = new Emergencia(null, 1, 18, 98, usu2);
