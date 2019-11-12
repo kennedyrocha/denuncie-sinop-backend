@@ -30,6 +30,12 @@ public class EmergenciaService {
 		return obj;
 	}
 	
+	public List<Emergencia> findAllByUsuario(Integer usuario_id) {
+		
+		List<Emergencia> obj = repo.findEmergencias(usuario_id);
+		return obj;
+	}
+	
 	public Emergencia insert(Emergencia obj) {
 		
 		obj.setId(null);
