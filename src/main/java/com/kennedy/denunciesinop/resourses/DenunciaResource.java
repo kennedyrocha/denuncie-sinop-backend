@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -34,6 +35,14 @@ public class DenunciaResource {
 	public ResponseEntity<List<Denuncia>> findAll(){
 		
 		List<Denuncia> lista = service.findAll();
+		
+		return ResponseEntity.ok().body(lista);
+	}
+	
+	@RequestMapping(value="/usuario", method=RequestMethod.GET)
+	public ResponseEntity<List<Denuncia>> findAllByUsuario(@RequestParam Integer usuario_id){
+		
+		List<Denuncia> lista = service.findAllByUsuario(usuario_id);
 		
 		return ResponseEntity.ok().body(lista);
 	}

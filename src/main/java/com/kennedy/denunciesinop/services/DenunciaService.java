@@ -30,6 +30,12 @@ public class DenunciaService {
 		return obj;
 	}
 	
+	public List<Denuncia> findAllByUsuario(Integer usuario_id) {
+		
+		List<Denuncia> obj = repo.findDenuncias(usuario_id);
+		return obj;
+	}
+	
 	public Denuncia insert(Denuncia obj) {
 		
 		obj.setId(null);

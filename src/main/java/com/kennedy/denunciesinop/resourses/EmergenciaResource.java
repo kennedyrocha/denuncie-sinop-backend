@@ -43,7 +43,7 @@ public class EmergenciaResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	/*@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/usuario", method=RequestMethod.GET)
 	public ResponseEntity<List<EmergenciaDTO>> findAllByUsuario(@RequestParam Integer usuario_id){
 		
 		List<Emergencia> lista = service.findAllByUsuario(usuario_id);
@@ -51,7 +51,7 @@ public class EmergenciaResource {
 		List<EmergenciaDTO> listDto = lista.stream().map(obj -> new EmergenciaDTO(obj)).collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(listDto);
-	}*/
+	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Emergencia obj){
