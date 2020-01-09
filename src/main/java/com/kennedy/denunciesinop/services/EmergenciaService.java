@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.kennedy.denunciesinop.domain.Emergencia;
 import com.kennedy.denunciesinop.repositories.EmergenciaRepository;
+import com.kennedy.denunciesinop.security.UserSS;
+import com.kennedy.denunciesinop.services.exceptions.AuthorizationException;
 import com.kennedy.denunciesinop.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -25,6 +27,12 @@ public class EmergenciaService {
 	}
 	
 	public List<Emergencia> findAll() {
+
+		UserSS user = UserService.authenticated();
+
+		if (user ==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		
 		List<Emergencia> obj = repo.findAll();
 		return obj;

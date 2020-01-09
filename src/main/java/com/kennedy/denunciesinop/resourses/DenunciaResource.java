@@ -18,8 +18,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kennedy.denunciesinop.domain.ComplementoDenuncia;
 import com.kennedy.denunciesinop.domain.Denuncia;
+import com.kennedy.denunciesinop.security.UserSS;
 import com.kennedy.denunciesinop.services.ComplementoDenunciaService;
 import com.kennedy.denunciesinop.services.DenunciaService;
+import com.kennedy.denunciesinop.services.UserService;
+import com.kennedy.denunciesinop.services.exceptions.AuthorizationException;
 
 @RestController
 @RequestMapping(value="/denuncias")
@@ -34,6 +37,12 @@ public class DenunciaResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Denuncia> buscar(@PathVariable Integer id){
 		
+		UserSS user = UserService.authenticated();
+
+		if (user ==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Denuncia obj = service.find(id);
 		
 		return ResponseEntity.ok().body(obj);
@@ -41,6 +50,12 @@ public class DenunciaResource {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Denuncia>> findAll(){
+		
+		UserSS user = UserService.authenticated();
+
+		if (user ==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		
 		List<Denuncia> lista = service.findAll();
 		
@@ -50,6 +65,12 @@ public class DenunciaResource {
 	@RequestMapping(value="/usuario", method=RequestMethod.GET)
 	public ResponseEntity<List<Denuncia>> findAllByUsuario(@RequestParam Integer usuario_id){
 		
+		UserSS user = UserService.authenticated();
+
+		if (user ==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		List<Denuncia> lista = service.findAllByUsuario(usuario_id);
 		
 		return ResponseEntity.ok().body(lista);
@@ -57,6 +78,12 @@ public class DenunciaResource {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Denuncia obj){
+		
+		UserSS user = UserService.authenticated();
+
+		if (user ==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		
 		obj = service.insert(obj);
 		
@@ -68,6 +95,12 @@ public class DenunciaResource {
 	@RequestMapping(value="/complemento",method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ComplementoDenuncia obj, @RequestParam Integer denuncia_id){
 		
+		UserSS user = UserService.authenticated();
+
+		if (user ==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		obj = serviceComplemento.insert(obj, denuncia_id);
 		
 		return ResponseEntity.created(null).build();
@@ -75,6 +108,12 @@ public class DenunciaResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Denuncia obj, @PathVariable Integer id){
+		
+		UserSS user = UserService.authenticated();
+
+		if (user ==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		
 		obj.setId(id);
 		
@@ -86,6 +125,12 @@ public class DenunciaResource {
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
+		
+		UserSS user = UserService.authenticated();
+
+		if (user ==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		
 		service.delete(id);
 		

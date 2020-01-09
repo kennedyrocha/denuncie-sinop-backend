@@ -15,7 +15,10 @@ import java.net.URI;
 
 import com.kennedy.denunciesinop.domain.Usuario;
 import com.kennedy.denunciesinop.dto.UsuarioDTO;
+import com.kennedy.denunciesinop.security.UserSS;
+import com.kennedy.denunciesinop.services.UserService;
 import com.kennedy.denunciesinop.services.UsuarioService;
+import com.kennedy.denunciesinop.services.exceptions.AuthorizationException;
 
 @RestController
 @RequestMapping(value="/usuarios")
@@ -35,6 +38,12 @@ public class UsuarioResource {
 	@RequestMapping(value="/{id}" ,method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody Usuario obj, @PathVariable Integer id){
 
+		UserSS user = UserService.authenticated();
+
+		if (user ==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		obj.setId(id);
 		obj = service.update(obj);
 
@@ -45,6 +54,12 @@ public class UsuarioResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 
+		UserSS user = UserService.authenticated();
+
+		if (user ==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		service.delete(id);
 
 		return ResponseEntity.noContent().build();

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.kennedy.denunciesinop.domain.ComplementoDenuncia;
 import com.kennedy.denunciesinop.domain.Denuncia;
@@ -29,6 +30,9 @@ public class DenunciaSinopApplication implements CommandLineRunner {
 	DenunciaRepository denunciaRepository;
 	
 	@Autowired
+	private BCryptPasswordEncoder pe;
+	
+	@Autowired
 	ComplementosDenunciaRepository complementosDenunciaRepository;
 	
 	public static void main(String[] args) {		
@@ -38,8 +42,8 @@ public class DenunciaSinopApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario usu1 = new Usuario(null,"Maria Silva", "kennedy@gmail.com","05333533199","123");
-		Usuario usu2 = new Usuario(null,"Maria Silva", "kennedy2@gmail.com","36378912377","123");
+		Usuario usu1 = new Usuario(null,"Maria Silva", "kennedy@gmail.com","05333533199", pe.encode("123"));
+		Usuario usu2 = new Usuario(null,"Maria Silva", "kennedy2@gmail.com","36378912377", pe.encode("123"));
 
 		Emergencia em1 = new Emergencia(null, 2, 15, 20, usu1);
 		Emergencia em2 = new Emergencia(null, 1, 18, 98, usu2);
